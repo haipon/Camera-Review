@@ -32,4 +32,19 @@ class ReviewController extends Controller
         // 4. Redirect back to the product page
         return back()->with('success', 'Review submitted successfully!');
     }
+
+    public function destroy(Review $review)
+    {
+        // 1. Authorization: Verify the logged-in user is the review owner
+        // The underlined 'if (auth()->id() !== $review->user_id)' in your image is correct.
+        if (Auth::id() !== $review->user_id) {
+        abort(403, 'You do not have permission to delete this review.');
+    }
+
+        // 2. Delete the review
+        $review->delete();
+
+        // 3. Redirect back to the page the review was deleted from
+        return back()->with('success', 'Review successfully deleted.');
+    }
 }

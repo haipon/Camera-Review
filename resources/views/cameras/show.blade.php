@@ -46,18 +46,42 @@
 
         <div class="space-y-4">
             @forelse ($reviews as $review)
-                <div class="p-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
-                    
-                    <div class="mb-1 text-sm">
-                        <span class="font-bold text-gray-800">
-                            {{ $review->user->name ?? 'username' }} 
-                        </span> 
-                        <span class="text-gray-500">
-                            | {{ $review->created_at->format('H:i a, M d, Y') }}
-                        </span>
+                <div class="relative p-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
+        
+                    <div class="flex justify-between items-start mb-2 text-sm"> 
+                        
+                        <div class="flex items-baseline space-x-1">
+                            <span class="font-bold text-gray-800">
+                                {{ $review->user->name ?? 'username' }} 
+                            </span> 
+                            <span class="text-gray-500 text-xs">
+                                | {{ $review->created_at->timezone('Asia/Jakarta')->format('H:i a, M d, Y') }} WIB
+                            </span>
+                        </div>
+                        
+                        @auth
+                            @if (auth()->id() === $review->user_id)
+                                <form 
+                                    action="{{ route('reviews.destroy', $review) }}" 
+                                    method="POST" 
+                                    onsubmit="return confirm('Are you sure you want to delete this review?');" 
+                                    class="absolute -bottom-2 right-2"
+                                >
+                                    @csrf
+                                    @method('DELETE') 
+                                    <button type="submit" 
+                                        class="text-gray-700 hover:text-red-500 p-1 transition duration-150 text-sm"
+                                        title="Delete Review"
+                                    >
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+
+                            @endif
+                        @endauth
                     </div>
-                    
-                    <p class="text-gray-700 text-sm">
+
+                    <p class="text-gray-700 text-sm mt-0">
                         {{ $review->body }}
                     </p>
                 </div>
