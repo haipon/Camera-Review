@@ -1,10 +1,15 @@
 <x-layout>
     <div class="max-w-4xl mx-auto py-8">
-        <div class="bg-gray-300 h-96 flex items-center justify-center mb-8 shadow-lg rounded-lg">
-            <span class="text-xl text-gray-700">Image Slideshow</span>
+        <div class="relative h-96 mb-8 shadow-lg rounded-lg overflow-hidden">
+            <img src="{{ asset('images/slideshows/japan1.jpg') }}" class="absolute w-full h-full object-cover rounded-lg opacity-100 slide" />
+            <img src="{{ asset('images/slideshows/japan2.jpg') }}" class="absolute w-full h-full object-cover rounded-lg opacity-0 slide" />
+            <img src="{{ asset('images/slideshows/japan3.jpg') }}" class="absolute w-full h-full object-cover rounded-lg opacity-0 slide" />
+            <img src="{{ asset('images/slideshows/japan4.jpg') }}" class="absolute w-full h-full object-cover rounded-lg opacity-0 slide" />
+            <img src="{{ asset('images/slideshows/japan5.jpg') }}" class="absolute w-full h-full object-cover rounded-lg opacity-0 slide" />
+            <div class="absolute inset-0 bg-black/20 rounded-lg"></div> <!-- optional dim overlay -->
         </div>
 
-        <div class="border border-blue-300 p-6 mb-10 rounded-lg shadow-md">
+        <div class="bg-white border border-blue-300 p-6 mb-10 rounded-lg shadow-md">
             <h2 class="text-2xl font-bold text-center mb-2">
                 {{ $accessory['name'] ?? 'Accessory Name' }}
             </h2>
@@ -86,7 +91,7 @@
                     </p>
                 </div>
             @empty
-                <p class="text-gray-500 text-center p-8 border rounded-lg">No reviews yet.</p>
+                <p class="bg-gray-100 text-gray-500 text-center p-8 border rounded-lg">No reviews yet.</p>
             @endforelse
         </div>
     </div>
