@@ -6,22 +6,28 @@
 
         <div class="border border-blue-300 p-6 mb-10 rounded-lg shadow-md">
             <h2 class="text-2xl font-bold text-center mb-2">
-                {{ $camera['model'] ?? 'Camera Name' }}
+                {{ $lens->model ?? 'Lens Name' }}
             </h2>
             <div class="flex justify-center space-x-6 mb-4 text-sm font-medium text-gray-600">
                 <span>
-                    <strong class="text-gray-800">Manufacturer:</strong> {{ $camera['manufacturer'] ?? 'N/A' }}
+                    <strong class="text-gray-800">Manufacturer:</strong> {{ $lens->manufacturer ?? 'N/A' }}
+                </span>
+                <span>
+                    <strong class="text-gray-800">Focal Length:</strong> {{ $lens->focal_length ?? 'N/A' }}
+                </span>
+                <span>
+                    <strong class="text-gray-800">Aperture:</strong> {{ $lens->aperture ?? 'N/A' }}
                 </span>
             </div>
             <p class="text-gray-700 text-center">
-                {{ $camera['description'] ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor...' }}
+                {{ $lens->description ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor...' }}
             </p>
         </div>
 
         <h3 class="text-3xl font-bold text-center mb-6">Reviews</h3>
 
         @auth
-            <form action="{{ route('reviews.store', ['type' => 'cameras', 'id' => $camera['id'] ?? $camera->id]) }}" method="POST" class="mb-10">
+            <form action="{{ route('reviews.store', ['type' => 'lenses', 'id' => $lens->id]) }}" method="POST" class="mb-10">
                 @csrf
                 
                 <div class="relative mb-3">
@@ -53,12 +59,12 @@
                             {{ $review->user->name ?? 'username' }} 
                         </span> 
                         <span class="text-gray-500">
-                            | {{ $review->created_at->format('H:i a, M d, Y') }}
+                            | {{ $review->created_at->format('time and date') }}
                         </span>
                     </div>
                     
                     <p class="text-gray-700 text-sm">
-                        {{ $review->body }}
+                        {{ $review->body ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis.' }}
                     </p>
                 </div>
             @empty

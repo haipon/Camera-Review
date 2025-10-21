@@ -10,7 +10,7 @@
 <body class="bg-gray-50 min-h-screen flex flex-col relative">
     <div class="pattern-bg w-full flex flex-col flex-grow"> 
         <header class="p-6 border-b border-gray-100">
-        <nav class="flex justify-between items-center max-w-7xl mx-auto mr-82">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto mr-85">
             <a href="/" class="text-2xl font-bold text-gray-800 tracking-wide">Lens<span style="color: #A6CFD5;">Route</span></a>
             
             <nav class="flex space-x-6 font-medium text-gray-600">

@@ -1,28 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CameraController;
+use App\Http\Controllers\LensController;
+use App\Http\Controllers\AccessoryController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cameras', function () {
+Route::get('/cameras', [CameraController::class, 'index'])->name('cameras.index');
 
-    $cameras = [
-        ["id" => 1, "name" => "Canon EOS R5", "is_featured" => true],
-        ["id" => 2, "name" => "Nikon Z7 II", "is_featured" => false],
-        ["id" => 3, "name" => "Sony A7R IV", "is_featured" => true],
-        ["id" => 4, "name" => "Fujifilm X-T4", "is_featured" => false],
-    ];
+Route::get('/lenses', [LensController::class, 'index'])->name('lenses.index');
 
-    return view('cameras.index', ["greeting" => "Welcome to the Camera Rental Page", "cameras" => $cameras]);
-});
+Route::get('/accessories', [AccessoryController::class, 'index'])->name('accessories.index');
 
-Route::get('/cameras/upload', function () {
-    return view('cameras.upload');
-});
+Route::get('/cameras/{id}', [CameraController::class, 'show'])->name('cameras.show');
 
-Route::get('/cameras/{id}', function ($id) {
+Route::get('/lenses/{id}', [LensController::class, 'show'])->name('lenses.show');
 
-    return view('cameras.show', ["id" => $id]);
-});
+Route::get('/accessories/{id}', [AccessoryController::class, 'show'])->name('accessories.show');
+
+Route::post('/{type}/{id}/reviews', [ReviewController::class, 'store'])
+    ->name('reviews.store')
+    ->middleware('auth')
+    ->where('type', 'cameras|lenses|accessories');

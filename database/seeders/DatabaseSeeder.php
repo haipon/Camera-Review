@@ -21,5 +21,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        $this->call([
+            CameraSeeder::class,
+        ]);
+
+        $this->call([
+            LensSeeder::class,
+        ]);
+
+        $this->call([
+            AccessorySeeder::class,
+        ]);
     }
 }
