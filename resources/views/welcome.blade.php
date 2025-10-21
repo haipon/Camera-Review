@@ -43,7 +43,7 @@
         </header>
 
         <main class="flex flex-col items-center flex-grow justify-center">
-            <div class="flex flex-col items-center -mt-48 ml-20">
+            <div class="flex flex-col items-center -mt-48 ml-10">
                 <h2 class="text-5xl font-extrabold text-gray-800 tracking-widest">Lens<span style="color: #A6CFD5;">Route</span></h2>
                 
                 <p class="mt-4 text-xl text-gray-700">Your next lens is here.</p>
